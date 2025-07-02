@@ -14,8 +14,7 @@ jobs:
       packages: write   # To push packages to GitHub Container Registry
 
     env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-
+      DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -74,7 +73,6 @@ jobs:
         with:
           images: | # Define base image names for metadata generation
             orion-visor-adminer
-            orion-visor-e2e
             orion-visor-guacd
             orion-visor-mysql
             orion-visor-redis
@@ -96,18 +94,6 @@ jobs:
           tags: |
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
-          labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
-
-      - name: Build and push orion-visor-e2e
-        uses: docker/build-push-action@v5
-        with:
-          context: ./docker/e2e
-          file: ./docker/e2e/Dockerfile
-          push: true
-          tags: |
-            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-e2e:${{ steps.meta.outputs.version }}
-            ghcr.io/${{ github.repository_owner }}/orion-visor-e2e:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
 
