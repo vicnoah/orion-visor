@@ -13,6 +13,9 @@ jobs:
       contents: read    # To read repository content
       packages: write   # To push packages to GitHub Container Registry
 
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -91,7 +94,7 @@ jobs:
           file: ./docker/adminer/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -103,7 +106,7 @@ jobs:
           file: ./docker/e2e/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-e2e:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-e2e:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-e2e:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -115,7 +118,7 @@ jobs:
           file: ./docker/guacd/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-guacd:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-guacd:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-guacd:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -127,7 +130,7 @@ jobs:
           file: ./docker/mysql/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-mysql:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-mysql:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-mysql:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -139,7 +142,7 @@ jobs:
           file: ./docker/redis/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-redis:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-redis:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-redis:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -161,7 +164,7 @@ jobs:
           file: ./docker/service/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-service:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-service:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-service:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
@@ -185,7 +188,7 @@ jobs:
           file: ./docker/ui/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/orion-visor-ui:${{ steps.meta.outputs.version }}
+            ${{ env.DOCKERHUB_USERNAME }}/orion-visor-ui:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-ui:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64 # Uncomment for multi-platform builds
