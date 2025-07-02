@@ -109,6 +109,14 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           # platforms: linux/amd64,linux/arm64
 
+      - name: Prepare mysql build context
+        run: |
+          echo "Copying SQL to service context..."
+          # ls -l ./sql/ # Optional: list files for debugging
+          cp -r ./sql ./docker/mysql
+          echo "Copied SQL."
+          # ls -l ./docker/mysql/ # Optional: list files for debugging
+
       - name: Build and push orion-visor-mysql
         uses: docker/build-push-action@v5
         with:
