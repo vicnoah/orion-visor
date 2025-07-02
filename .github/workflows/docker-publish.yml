@@ -95,7 +95,7 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-adminer:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       - name: Build and push orion-visor-guacd
         uses: docker/build-push-action@v5
@@ -107,7 +107,7 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-guacd:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-guacd:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       - name: Prepare mysql build context
         run: |
@@ -127,7 +127,7 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-mysql:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-mysql:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       - name: Build and push orion-visor-redis
         uses: docker/build-push-action@v5
@@ -139,7 +139,7 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-redis:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-redis:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
 
       # --- Build and push orion-visor-service (requires pre-built JAR) ---
 
@@ -161,7 +161,7 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-service:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-service:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64
         # run: rm ./docker/service/orion-visor-launch.jar # Optional cleanup
 
       # --- Build and push orion-visor-ui (requires pre-built dist directory) ---
@@ -185,6 +185,6 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/orion-visor-ui:${{ steps.meta.outputs.version }}
             ghcr.io/${{ github.repository_owner }}/orion-visor-ui:${{ steps.meta.outputs.version }}
           labels: ${{ steps.meta.outputs.labels }}
-          # platforms: linux/amd64,linux/arm64 # Uncomment for multi-platform builds
+          platforms: linux/amd64,linux/arm64 # Uncomment for multi-platform builds
         # Optional: Clean up the copied dist directory after build
         # run: rm -rf ./docker/ui/dist
